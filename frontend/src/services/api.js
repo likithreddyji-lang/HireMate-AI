@@ -1,7 +1,10 @@
 import axios from 'axios';
 
+// In production (Vercel), set VITE_API_URL to your Render backend URL.
+// e.g. https://hiremate-ai-backend.onrender.com
+// Falls back to localhost for local development.
 const API = axios.create({
-  baseURL: 'http://localhost:8080',
+  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:8080',
   headers: {
     'Content-Type': 'application/json',
   },

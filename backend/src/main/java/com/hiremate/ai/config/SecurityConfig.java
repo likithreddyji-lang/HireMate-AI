@@ -79,8 +79,19 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        // Allow local React server on port 5173
-        configuration.setAllowedOrigins(List.of("http://localhost:5173"));
+
+        // Read allowed origins from env var ALLOWED_ORIGINS (comma-separated).
+        // Falls back to localhost for local development when env var is not set.
+        String allowedOriginsEnv = System.getenv("ALLOWED_ORIGINS");
+        List<String> allowedOrigins;
+        if (allowedOriginsEnv != null && !allowedOriginsEnv.isBlank()) {
+            allowedOrigins = Arrays.asList(allowedOriginsEnv.split(","));
+        } else {
+            // Local dev defaults
+            allowedOrigins = List.of("http://localhost:5173", "http://localhost:3000");
+        }
+
+        configuration.setAllowedOrigins(allowedOrigins);
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"));
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setExposedHeaders(List.of("Authorization"));

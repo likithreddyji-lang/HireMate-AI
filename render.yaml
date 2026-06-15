@@ -1,0 +1,42 @@
+services:
+  - type: web
+    name: hiremate-ai-backend
+    runtime: docker
+    # Points to the backend subfolder where the Dockerfile lives
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    # Render's free tier — upgrade to standard for production
+    plan: free
+    healthCheckPath: /api/auth/health
+    envVars:
+      # ── Server ──────────────────────────────────────────────────────────────
+      - key: PORT
+        value: 8080
+
+      # ── Database (H2 in-memory for free tier — replace with MySQL for prod) ─
+      - key: SPRING_DATASOURCE_URL
+        value: jdbc:h2:mem:hiremate_db;DB_CLOSE_DELAY=-1;MODE=MySQL
+      - key: SPRING_DATASOURCE_USERNAME
+        value: sa
+      - key: SPRING_DATASOURCE_PASSWORD
+        value: ""
+      - key: SPRING_DATASOURCE_DRIVER_CLASS_NAME
+        value: org.h2.Driver
+      - key: SPRING_JPA_HIBERNATE_DDL_AUTO
+        value: create-drop
+      - key: SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT
+        value: org.hibernate.dialect.H2Dialect
+
+      # ── JWT (CHANGE THIS to a strong secret in production!) ─────────────────
+      - key: JWT_SECRET
+        value: Mjg0YjVkNmQ4NDVlYzMyZTNkOWFjYTcwNzEwNmUxNGE3OWUwODlkODNiNzU5YWIzYjhiMDQ1OTBiNWRjY2JhMA==
+      - key: JWT_EXPIRATION
+        value: "86400000"
+
+      # ── OpenAI (set your real key here or leave "mock" for demo mode) ────────
+      - key: OPENAI_KEY
+        value: mock
+
+      # ── CORS — your Vercel frontend URL ─────────────────────────────────────
+      - key: ALLOWED_ORIGINS
+        value: https://hire-mate-ai.vercel.app

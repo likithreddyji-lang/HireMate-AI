@@ -1,0 +1,70 @@
+# ===========================
+# HireMate AI - .gitignore
+# ===========================
+
+# ---- Java / Maven (Backend) ----
+backend/target/
+backend/*.class
+backend/*.jar
+backend/*.war
+backend/*.ear
+backend/.mvn/wrapper/maven-wrapper.jar
+*.log
+
+# Maven wrapper (optional: keep if you want reproducible builds)
+# !backend/.mvn/wrapper/maven-wrapper.properties
+
+# ---- H2 Database Files ----
+backend/data/
+*.db
+*.mv.db
+*.trace.db
+
+# ---- Spring Boot ----
+backend/src/main/resources/application-local.properties
+backend/src/main/resources/application-secret.properties
+
+# ---- Node / React / Vite (Frontend) ----
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+frontend/.cache/
+frontend/coverage/
+
+# ---- Environment Variables / Secrets ----
+.env
+.env.*
+!.env.example
+*.env
+
+# ---- IDE & Editor Files ----
+.vscode/settings.json
+.vscode/launch.json
+.idea/
+*.iml
+*.ipr
+*.iws
+.classpath
+.project
+.settings/
+*.swp
+*.swo
+*~
+
+# ---- OS Files ----
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ---- Logs ----
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ---- Misc ----
+*.tmp
+*.bak
+*.orig
+.gradle/

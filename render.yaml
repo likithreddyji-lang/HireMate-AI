@@ -39,4 +39,4 @@ services:
 
       # ── CORS — your Vercel frontend URL ─────────────────────────────────────
       - key: ALLOWED_ORIGINS
-        value: https://hire-mate-ai.vercel.app
+        value: https://frontend-gznznsf12-likithreddyji-langs-projects.vercel.app

@@ -4,7 +4,7 @@ import axios from 'axios';
 // e.g. https://hiremate-ai-backend.onrender.com
 // Falls back to localhost for local development.
 const API = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:8080',
+  baseURL: import.meta.env.VITE_API_URL || 'https://hiremate-ai-backend-40tc.onrender.com',
   headers: {
     'Content-Type': 'application/json',
   },
